@@ -4,12 +4,6 @@
 
 	export let url: string;
 
-	// The workerSrc property shall be specified.
-	pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-		'pdfjs-dist/build/pdf.worker.js',
-		import.meta.url
-	).toString();
-
 	export let pageNumber: number = 1;
 	export let pagesCount: number = 0;
 	let scale: number = 5;
@@ -74,6 +68,13 @@
 		pageNumber = seekPage;
 		queueRenderPage(seekPage);
 	};
+
+	$: if (pdfjs.GlobalWorkerOptions) {
+		pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+			'pdfjs-dist/build/pdf.worker.js',
+			import.meta.url
+		).toString();
+	}
 
 	$: if (isBrowser && !pdfDoc) {
 		canvas = document.getElementById('the-canvas')! as HTMLCanvasElement;
