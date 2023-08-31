@@ -1,6 +1,6 @@
 {
 	"name": "@am-77/svelte-pdf",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"keywords": ["svelte", "sveltekit", "pdf", "pdf-viewer", "pdf-reader", "pdfjs", "javascript", "typescript", "pdfjs-dist", "svelte-pdf-component"],
 	"scripts": {
 		"dev": "vite dev",
@@ -51,6 +51,6 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
-		"pdfjs-dist": "2.6.347"
+		"pdfjs-dist": "^3.10.111"
 	}
 }
