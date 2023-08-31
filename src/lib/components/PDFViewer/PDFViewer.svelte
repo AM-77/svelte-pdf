@@ -1,6 +1,5 @@
 <script lang="ts">
 	import * as pdfjs from 'pdfjs-dist';
-	import workerURL from '../../utils/pdf.worker.min.txt';
 
 	export let url: string;
 
@@ -82,7 +81,8 @@
 	};
 
 	$: if (pdfjs.GlobalWorkerOptions) {
-		pdfjs.GlobalWorkerOptions.workerSrc = workerURL;
+		const workerSrc = new URL('pdfjs-dist/build/pdf.worker.js', import.meta.url).toString();
+		pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
 	}
 
 	$: if (typeof document !== 'undefined' && !pdfDoc) {
