@@ -7,6 +7,8 @@
 	let nextPage: () => void;
 	let prevPage: () => void;
 	let gotoPage: (nbr: number) => void;
+	let zoomIn: () => void;
+	let zoomOut: () => void;
 	let pageNumber: number;
 	let pagesCount: number;
 
@@ -14,7 +16,16 @@
 </script>
 
 <div>
-	<PDFViewer bind:nextPage bind:prevPage bind:gotoPage bind:pageNumber bind:pagesCount {url}>
+	<PDFViewer
+		bind:nextPage
+		bind:prevPage
+		bind:gotoPage
+		bind:zoomIn
+		bind:zoomOut
+		bind:pageNumber
+		bind:pagesCount
+		{url}
+	>
 		<div slot="top-actions">
 			<button on:click={prevPage}>Prev</button>
 			<span>{pageNumber} / {pagesCount}</span>
@@ -22,6 +33,9 @@
 			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 			<input type="number" bind:value={seekPage} />
 			<button on:click={() => gotoPage(seekPage)}>go</button>
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			<button on:click={zoomIn}>+</button>
+			<button on:click={zoomOut}>-</button>
 		</div>
 
 		<div slot="bottom-actions">
@@ -31,6 +45,9 @@
 			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 			<input type="number" bind:value={seekPage} />
 			<button on:click={() => gotoPage(seekPage)}>go</button>
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			<button on:click={zoomIn}>+</button>
+			<button on:click={zoomOut}>-</button>
 		</div>
 	</PDFViewer>
 </div>
