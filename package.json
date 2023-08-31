@@ -1,6 +1,6 @@
 {
 	"name": "@am-77/svelte-pdf",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"keywords": ["svelte", "sveltekit", "pdf", "pdf-viewer", "pdf-reader", "pdfjs", "javascript", "typescript", "pdfjs-dist", "svelte-pdf-component"],
 	"scripts": {
 		"dev": "vite dev",
