@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as pdfjs from 'pdfjs-dist';
-	import { isBrowser } from '../../utils';
+	import workerURL from '../../utils/pdf.worker.min.txt';
 
 	export let url: string;
 
@@ -70,13 +70,10 @@
 	};
 
 	$: if (pdfjs.GlobalWorkerOptions) {
-		pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-			'pdfjs-dist/build/pdf.worker.js',
-			import.meta.url
-		).toString();
+		pdfjs.GlobalWorkerOptions.workerSrc = workerURL;
 	}
 
-	$: if (isBrowser && !pdfDoc) {
+	$: if (typeof document !== 'undefined' && !pdfDoc) {
 		canvas = document.getElementById('the-canvas')! as HTMLCanvasElement;
 		if (canvas) {
 			ctx = canvas.getContext('2d')!;
