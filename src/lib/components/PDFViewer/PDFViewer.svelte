@@ -6,13 +6,13 @@
 
 	export let pageNumber: number = 1;
 	export let pagesCount: number = 0;
-	let scale: number = 5;
 
 	let pdfDoc: pdfjs.PDFDocumentProxy;
 	let pageRendering: boolean = false;
 	let pageNumberPending: number | null = null;
 	let ctx: CanvasRenderingContext2D;
 	let canvas: HTMLCanvasElement;
+	let scale: number = 1.5;
 
 	const renderPage = (num: number) => {
 		pageRendering = true;
@@ -69,6 +69,18 @@
 		queueRenderPage(seekPage);
 	};
 
+	export const zoomIn = () => {
+		if (scale >= 2.5) return;
+		scale += 0.1;
+		queueRenderPage(pageNumber);
+	};
+
+	export const zoomOut = () => {
+		if (scale <= 0.8) return;
+		scale -= 0.1;
+		queueRenderPage(pageNumber);
+	};
+
 	$: if (pdfjs.GlobalWorkerOptions) {
 		pdfjs.GlobalWorkerOptions.workerSrc = workerURL;
 	}
@@ -89,13 +101,6 @@
 
 <slot name="top-actions" />
 
-<canvas id="the-canvas" class={$$props.class || 'pdf-viewer'} />
+<canvas id="the-canvas" class={$$props.class} />
 
 <slot name="bottom-actions" />
-
-<style>
-	.pdf-viewer {
-		width: 100%;
-		height: 100%;
-	}
-</style>
